@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"/> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"/> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"/> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html  xmlns:th="https://www.thymeleaf.org" class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+    <div th:replace="fragments/head :: head(olscss=true, select2=true)"></div>
+    <title id="pageTitle" th:inline="text">Search &lt; [[${title}]] &lt; [[${org}]]</title>
+    <!-- A few keywords that relate to the content of THIS PAGE (not the whole project)
+    <meta name="keywords" content="biosamples, europe, EBI" />
+    <!- - Describe what this page is about - ->
+    <meta name="description" content="EMBL-EBI" />
+    <meta name="ebi:last-review" content="2016-12-20" />
+    <!- - The last time the content was reviewed - ->
+    <meta name="ebi:expiry" content="2017-12-20" />
+    <!- - When this content is no longer relevant -->
+</head>
+
+
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
+
+<section id="main-content-area" role="main">
+    <div class="row">
+
+        <div id="mainSearchDiv" class="small-12 columns breadcrumbDiv">
+            <form id="filter_form" onsubmit="resetPage()" name="local-search" action="search" method="get">
+                <div id="bloodhound" class="input-group">
+                    <input style="margin-bottom: 0.1em;" name="q" class="form-control typeahead" autofocus="autofocus" type="text" data-olswidget="multisearch" data-olsontology=""  placeholder="What are you looking for today?" aria-describedby="basic-addon1"/>
+                    <input id="group-id" name="groupField" type="hidden" value="iri"/>
+
+                            <span class="input-group-btn">
+                              <button class="button secondary searchButton glyphicon glyphicon-search" type="submit">Search</button>
+                                <!-- <button class="button" type="submit"><span class="icon icon-functional" data-icon="j"></span></button> -->
+                            </span>
+
+                </div>
+                <div style="text-align: left" class="input-group">
+                    <div class="checkbox-inline">
+                        <label>
+                            <input id="exact-id" onclick="$('#filter_form').submit();" class="" name="exact" type="checkbox" th:checked="${searchOptions.isExact()}"/> Exact match
+                        </label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label>
+                            <input id="obsolete-id" onclick="$('#filter_form').submit();" class="" type="checkbox" name="obsoletes" th:checked="${searchOptions.isQueryObsoletes()}"/> Obsolete terms
+                        </label>
+                    </div>
+
+                </div>
+
+                <input id="query-id" type="hidden" th:value="${searchOptions.query}"/>
+                <input id="start" type="hidden" name="start" value="0" th:value="${searchOptions.start}"/>
+
+                <div style="visibility:hidden;position:absolute;">
+                    <select id="ontology-id" name="ontology" multiple="multiple" >
+                        <option
+                                th:value="${ontology}"
+                                th:each="ontology : ${searchOptions.getOntologies()}"
+                                selected="selected"
+                        >
+                        </option>
+                    </select>
+                </div>
+
+                <div style="visibility:hidden;position:absolute;">
+                    <select id="ontology-type-id" name="type" multiple="multiple">
+                        <option
+                                th:value="${type}"
+                                th:each="type : ${searchOptions.getTypes()}"
+                                selected="selected"
+                        >
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div id="filterBoxBox" class="small-3 columns" style="text-align: left;">
+            <div id="filterBox">
+              <form id="ontofilter" disabled="true">
+                <fieldset form="ontofilter" display="block">
+                    <!--<legend><span class="glyphicon glyphicon-filter">Filters</span></legend>-->
+                    <h4 class="filterbox-header">Term type</h4>
+                    <div class="filterBoxes">
+                        <select id="ontology-select-type-id" name="type" class="type-select" multiple="multiple" style="width:100%"
+                                th:with="types=${searchOptions.getTypes()}"
+                        >
+                            <option value="class"
+                                    th:selected="${#sets.contains(types , 'class')}">Class</option>
+                            <option value="property"
+                                    th:selected="${#sets.contains(types , 'property')}">Property</option>
+                            <option value="individual"
+                                    th:selected="${#sets.contains(types , 'individual')}">Individual</option>
+                            <option value="Ontology"
+                                    th:selected="${#sets.contains(types , 'ontology')}">Ontology</option>
+                        </select>
+                        <div id="type-summary">
+                        </div>
+                    </div>
+
+                    <h4 class="filterbox-header">Ontologies</h4>
+                    <div class="filterBoxes">
+                        <select id="ontology-select-id" name="ontology" class="ontology-select" multiple="multiple" style="width:100%">
+                            <option
+                                    th:value="${{onto.getConfig().getNamespace()}}"
+                                    th:each="onto : ${all_ontologies}"
+                                    th:text="${{onto.getConfig().getTitle()}} + ' (' + ${{onto.getConfig().getPreferredPrefix()}} + ')'"
+                                    th:attr="data-ontology-title=${{onto.getConfig().getTitle()}}"
+                                    th:with="ontologies=${searchOptions.getOntologies()}"
+                                    th:selected="${#sets.contains(ontologies , onto.getConfig().getNamespace())}"
+                            >
+                            </option>
+                        </select>
+                        <div id="ontology-summary">
+                        </div>
+                    </div>
+                    <button id="clearFilters" type="button" class="button secondary filterbox-button" onclick="clearFilter()">Clear all filters</button>
+                </fieldset>
+            </form>
+          </div>
+        </div>
+
+
+        <div class="small-9 columns">
+            <div style="text-align: center;" id="searching">
+                <img th:src="@{img/loading1.gif}" src="../static/img/loading1.gif" alt="Search loading..."/>
+                <span th:inline="text">Searching [[${shortTitle}]], please wait...</span>
+            </div>
+
+
+            <div id="search-results-summary" style="display: none;">
+                    <h2 class="search-results-header">Search results for
+                        <span class="searchterm" th:text="${searchOptions.query}">text</span>
+                    </h2>
+
+                    <nav>
+                        <ul class="menu search-results-top-navbar">
+                            <li><a class="pagingButton" onclick="clickPrev()">Previous</a></li>
+                            <!--li><button class="button secondary" onclick="clickPrev()">Previous</button></li-->
+                            <span class="search-results-count">Showing <span class="start-display">0</span> to <span class="end-display">10</span> of <span class="total-display">0</span> results</span>
+                            <li><a class="pagingButton" onclick="clickNext()">Next</a></li>
+                            <!--li><button class="button secondary" onclick="clickNext()">Next</button></li-->
+                        </ul>
+                    </nav>
+                    <div id="search-results">
+                    </div>
+                    <nav class="bottom-nav">
+                        <ul class="menu search-results-bottom-navbar">
+                            <li><a class="pagingButton" onclick="clickPrev()">Previous</a></li>
+                            <span class="search-results-count">Showing <span class="start-display">0</span> to  <span class="end-display">10</span> of <span class="total-display">0</span> results</span>
+                            <li><a class="pagingButton" onclick="clickNext()">Next</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+
+<!-- <script type="text/javascript" src="/js/oxo.js" th:src="@{/js/oxo.js}"></script> -->
+
+<script type="text/javascript" src="../static/js/ols.js" th:src="@{js/ols.js}"></script>
+<script type="text/javascript" src="../static/js/ols-termselect2.js" th:src="@{js/ols-termselect2.js (beta=r1)}"></script>
+<script type="text/javascript" src="../static/js/ols-adv-search.js" th:src="@{js/ols-adv-search.js (beta=r4)}"></script>
+<script type="text/javascript" src="../static/js/select2/4.0.0/select2.min.js" th:src="@{js/select2/4.0.0/select2.min.js}"></script>
+
+<script type="text/javascript" src="../static/js/typeahead/typeahead.bundle.js" th:src="@{js/typeahead/typeahead.bundle.js}"></script>
+<script type="text/javascript" src="../static/js/handlebars/4.0.5/handlebars.min.js" th:src="@{js/handlebars/4.0.5/handlebars.min.js}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"/> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"/> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"/> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]> <html  xmlns:th="https://www.thymeleaf.org" class="no-js" lang="en"> <![endif]-->
+
+
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <div th:replace="fragments/head :: head(olscss=true)"></div>
+    <title id="pageTitle" th:inline="text">[[${title}]] &lt; [[${org}]]</title>
+    <!-- A few keywords that relate to the content of THIS PAGE (not the whole project)
+    <meta name="keywords" content="biosamples, europe, EBI" />
+    <!- - Describe what this page is about - ->
+    <meta name="description" content="EMBL-EBI" />
+    <meta name="ebi:last-review" content="2016-12-20" />
+    <!- - The last time the content was reviewed - ->
+    <meta name="ebi:expiry" content="2017-12-20" />
+    <!- - When this content is no longer relevant -->
+    <!--link rel="stylesheet" href="../static/css/typeahead/typeaheadjs.css" th:href="@{css/typeahead/typeaheadjs.css}" type="text/css" media="screen"/-->
+</head>
+
+
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
+
+<section id="main-content-area" role="main">
+
+    <!--@thymesVar id="summary" type="uk.ac.ebi.spot.ols.controller.ui.HomeController.SummaryInfo" -->
+    <div class="row">
+        <div th:if="${start}" style="font-size: larger;" class="callout alert">
+            <span><i class="icon icon-generic" data-icon="alert"></i> Maintenance</span>
+            <ul>
+                <li th:inline="text">[[${shortTitle}]] is due for maintenance and will be unavailable between <span th:text="${start}"/> and
+                    <span th:text="${end}"/>. Apologies for any inconvenience.</li>
+                <li th:if="${message}" th:text="${message}"></li>
+            </ul>
+        </div>
+
+        <div class="small-9 columns">
+
+            <div id="mainpageSearchBox">
+                <h4 th:inline="text">Welcome to the [[${org}]] [[${title}]]</h4>
+                <form id="filter_form" name="local-search" action="search" method="get">
+                    <div id="bloodhound" class="input-group">
+                        <input style="margin-bottom: 0.1em;" class="form-control typeahead" autofocus="autofocus" type="text" name="q" data-olswidget="multisearch" data-olsontology="" th:placeholder="'Search ' + ${shortTitle} + '...'" aria-describedby="basic-addon1"/>
+                              <button class="button secondary searchButton glyphicon glyphicon-search" type="submit">Search</button>
+                    </div>
+                        <span class="examples">Examples: <a class="nounderline ontology-link" href="search?q=diabetes">diabetes</a>,
+                             <a class="nounderline ontology-link" href="search?q=GO:0098743">GO:0098743</a></span>
+                        <span style="float: right;" class="examples"><a class="nounderline ontology-link" href="ontologies">Looking for a particular ontology?</a>
+                         </span>
+                </form>
+            </div>
+
+            <div th:if="${debrand} == false">
+                <div class="small-4 columns">
+                    <h4>
+                        <i style="color: #BF8230;" class="icon icon-functional" data-icon="b"></i>
+                        <a href="docs/about">About ChemTS</a>
+                    </h4>
+                    <p class="about">
+                        The NFDI4Chem Terminology Service is a repository for chemistry ontologies that aims to provide
+                        a single point of access to the latest ontology versions. You can browse the ontologies through
+                        the website as well as programmatically via the ChemTS API. ChemTS is developed and maintained by TIB on top of OLS by
+                        <a href="http://www.ebi.ac.uk/about/spot-team">Samples, Phenotypes and Ontologies Team</a>
+                        (SPOT) at EMBL-EBI.
+                    </p>
+                </div>
+
+                <div class="small-4 columns">
+                    <h4>
+                        <i style="color: #BF8230;" class="icon icon-functional" data-icon="t"></i>
+                        <a href="https://www.ebi.ac.uk/spot/ontology/">Related Tools</a>
+                    </h4>
+                    <p class="about">
+                        In addition to OLS the SPOT team also provides the OxO, Zooma and Webulous services.
+                        <a href="//www.ebi.ac.uk/spot/oxo">OxO</a> provides cross-ontology mappings between terms from
+                        different ontologies. <a href="//www.ebi.ac.uk/spot/zooma">Zooma</a> is a service to assist in
+                        mapping data to ontologies in OLS and <a href="//www.ebi.ac.uk/spot/webulous">Webulous</a> is a
+                        tool for building ontologies from spreadsheets.
+                    </p>
+                </div>
+
+                <div class="small-4 columns">
+                    <h4>
+                        <i style="color: #BF8230;" class="icon icon-generic" data-icon="l"></i>
+                        <a href="https://github.com/EBISPOT/OLS/issues">Report an Issue</a>
+                    </h4>
+                    <p class="about">
+                        For feedback, enquiries or suggestion about OLS or to request a new ontology please use
+                        our GitHub <a href="https://github.com/EBISPOT/OLS/issues">issue tracker</a>.
+                        For announcements relating to
+                        OLS, such as new releases and new features sign up to the
+                        <a href="https://listserver.ebi.ac.uk/mailman/listinfo/ols-announce">OLS announce mailing
+                        list</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="dataContentDiv" class="small-3 columns">
+            <h4>
+                <i class="icon icon-generic" data-icon="g"></i> Data Content
+            </h4>
+            <h5>Updated <span th:text="${#calendars.format(summary.getLastUpdated(), 'dd MMM yyyy HH:mm')}">Today at 07:00</span></h5>
+            <ul>
+                <li><span th:text="${summary.getNumberOfOntologies()}">102</span> ontologies</li>
+                <li th:if="${summary.getNumberOfTerms() &gt; 0}"><span th:text="${#numbers.formatInteger(summary.getNumberOfTerms(),3,'COMMA')}">102</span> terms</li>
+                <li th:if="${summary.getNumberOfProperties() &gt; 0}"><span th:text="${#numbers.formatInteger(summary.getNumberOfProperties(),3,'COMMA')}">102</span> properties</li>
+                <li th:if="${summary.getNumberOfIndividuals() &gt; 0}"><span th:text="${#numbers.formatInteger(summary.getNumberOfIndividuals(),3,'COMMA')}">102</span> individuals</li>
+                <li th:if="${summary.getSoftwareVersion() != null}">Version <span th:text="${summary.getSoftwareVersion()}">102</span></li>
+            </ul>
+
+            <div th:if="${debrand} == false">
+                <a class="twitter-timeline" href="https://twitter.com/Nfdi4Chem?ref_src=twsrc%5Etfw">Tweets by Nfdi4Chem</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+
+<!-- <script type="text/javascript" src="/js/oxo.js" th:src="@{/js/oxo.js}"></script> -->
+
+<script type="text/javascript" src="../static/js/typeahead/typeahead.bundle.js" th:src="@{js/typeahead/typeahead.bundle.js}"></script>
+<script type="text/javascript" src="../static/js/handlebars/4.0.5/handlebars.min.js" th:src="@{js/handlebars/4.0.5/handlebars.min.js}"></script>
+
+<script type="text/javascript" src="../static/js/ols.js" th:src="@{js/ols.js}"></script>
+<script type="text/javascript" src="../static/js/ols-termselect2.js" th:src="@{js/ols-termselect2.js}"></script>
+
+
+<script type="text/javascript" src="../static/js/jquery.browser.min.js" th:src="@{js/jquery.browser.min.js}"></script>
+<script>
+    // See https://github.com/gabceb/jquery-browser-plugin for futher details how to use the plugin
+    var version;
+    var htmlString='';
+    //Get the browser version
+    version=$.browser.version;
+    //Slicing the first part of the number, which represents the version number of the browser
+    version=version.slice(0,version.indexOf("."));
+    //Parse the string to an int
+    version=parseInt(version);
+    //IE messages
+    if ($.browser.msie === true)
+    {
+        //Message for people with IE6 or 7
+        if (version===7 || version===6) {
+            htmlString = htmlString + '<div id="browser_warning"><h3 style="background:red; text-align:center;">Your browser is not up to date. You can NOT use this service with your version!</h3></div>';
+            $("#content").prepend(htmlString);
+        }
+        //Message for people using IE8
+        if (version===8)
+        {
+            htmlString = htmlString + '<div id="browser_warning"><h3 style="background:red; text-align:center;">Your browser is not up to date. You can try to use the service but some things might not work as expected!</h3></div>';
+            $("#content").prepend(htmlString);
+        }
+    }
+    //Message for WebKit browsers
+    // if ($.browser.webkit === true) {     }
+    //Message for mozilla browsers
+    //if ($.browser.mozilla === true) {     }
+    //Message to all mobile devices trying to use OLS
+    //if ($.browser.mobile === true) {       }
+</script>
+
+<!-- All JS that is just used on this page should go here, I suppose-->
+<script>
+    $(document).ready(function() {
+    });
+</script>
+
+</body>
+</html>

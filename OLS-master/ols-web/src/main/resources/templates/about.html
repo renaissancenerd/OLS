@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"/> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"/> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"/> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html  xmlns:th="https://www.thymeleaf.org" class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+    <div th:replace="fragments/head :: head"></div>
+    <title id="pageTitle" th:inline="text">About [[${title}]] &lt; [[${org}]]</title>
+    <!-- A few keywords that relate to the content of THIS PAGE (not the whole project)
+    <meta name="keywords" content="biosamples, europe, EBI" />
+    <!- - Describe what this page is about - ->
+    <meta name="description" content="EMBL-EBI" />
+    <meta name="ebi:last-review" content="2016-12-20" />
+    <!- - The last time the content was reviewed - ->
+    <meta name="ebi:expiry" content="2017-12-20" />
+    <!- - When this content is no longer relevant -->
+</head>
+
+
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
+
+<section id="main-content-area" role="main">
+    <div class="row">
+        <h2>HELLO</h2>
+
+        <h3>About the Ontology Lookup Service</h3>
+
+                <p>
+                    The Ontology Lookup Service (OLS) is a repository for biomedical ontologies that aims to provide a single point of access to the latest ontology versions. The user can browse the ontologies through the website as well as programmatically via the OLS API. OLS is developed and maintained by the <a href="http://www.ebi.ac.uk/about/spot-team">Samples, Phenotypes and Ontologies team</a> at EMBL-EBI.
+                </p>
+
+                <h4>Funding</h4>
+                <p>
+                    OLS is supported in part by CORBEL funded by the  EU's Horizon 2020 research and innovation programme (2014–2020) under grant agreement number 654248 and by DIACHRON, EU FP7 Capacities Specific Programme,/grant/agreement/number/284209.
+                </p>
+
+
+                <h4>Thanks</h4>
+
+                <p>OLS makes use of many public and freely available software resources - we would like to thank them all for their continued support.</p>
+                <ul>
+                    <li><a href="https://spring.io">Spring</a>: application framework</li>
+                    <li><a href="http://owlapi.sourceforge.net">OWL API</a>: Java OWL API</li>
+                    <li><a href="http://www.hermit-reasoner.com">HermiT</a>: OWL reasoner</li>
+                    <li><a href="https://www.cs.ox.ac.uk/isg/tools/ELK/">Elk</a>: OWL reasoner</li>
+                    <li><a href="http://neo4j.com">Neo4j</a>: Graph database</li>
+                    <li><a href="http://lucene.apache.org/solr/">Solr</a>: Search server</li>
+                    <li><a href="https://www.mongodb.org">MongoDB</a>: Document store</li>
+                    <li><a href="http://virtuoso.openlinksw.com">OpenLink Virtuoso</a>: RDF triple store provider for SPARQL endpoint</li>
+                    <li><a href="http://tomcat.apache.org">Apache Tomcat</a>: Web server</li>
+                    <li><a href="https://maven.apache.org">Apache Maven</a>: Software library dependency management</li>
+                    <li><a href="https://github.com">GitHub</a>: - source code hosting</li>
+                    <li><a href="https://www.atlassian.com/software/bamboo/">Bamboo</a>: Continuous integration, continuous deployment and release management.</li>
+                    <li><a href="https://www.atlassian.com/software/fisheye/">Fisheye</a>: Browse, search and track your source code repositories.</li>
+                    <li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> is the full-featured commercial IDE — with a complete set of tools and integrations with the most important modern technologies and frameworks, such as Spring and Hibernate — a must-have for effective Web and Java EE development.</li>
+                </ul>
+
+    </div>
+</section>
+
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+
+<!-- <script type="text/javascript" src="/js/oxo.js" th:src="@{/js/oxo.js}"></script> -->
+
+
+<!-- All JS that is just used on this page should go here, I suppose-->
+<script>
+    $(document).ready(function() {
+    });
+</script>
+
+</body>
+</html>

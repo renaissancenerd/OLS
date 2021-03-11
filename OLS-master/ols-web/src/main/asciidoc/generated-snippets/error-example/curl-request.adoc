@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl -L 'http://www.ebi.ac.uk/error' -i
+----

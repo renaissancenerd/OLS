@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"/> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"/> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"/> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html  xmlns:th="https://www.thymeleaf.org" class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+    <div th:replace="fragments/head :: head(olscss=true, proton=true, visualise=true)"></div>
+    <title id="pageTitle" th:inline="text">[[${ontologyTitle}]] &lt; [[${title}]] &lt; [[${org}]]</title>
+    <!-- A few keywords that relate to the content of THIS PAGE (not the whole project)
+    <meta name="keywords" content="biosamples, europe, EBI" />
+    <!- - Describe what this page is about - ->
+    <meta name="description" content="EMBL-EBI" />
+    <meta name="ebi:last-review" content="2016-12-20" />
+    <!- - The last time the content was reviewed - ->
+    <meta name="ebi:expiry" content="2017-12-20" />
+    <!- - When this content is no longer relevant -->
+</head>
+
+
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
+
+<section id="main-content-area" role="main">
+
+    <div id="content" role="main" class="row">
+        <div class="breadcrumbDiv">
+            <nav id="breadcrumb">
+                <p>
+                    <a th:inline="text" href="../../../index">[[${shortTitle}]]</a> &gt;
+                    <a href="#"
+                       th:href="@{../../../ontologies/__${ontologyTerm.getOntologyName()}__}"
+                       style="border-bottom-width: 0px;"><span class="ontology-source"
+                                                               th:text="${ontologyTerm.getOntologyPrefix()}">parent 1</span></a>   &gt;
+                    <span th:text="${ontologyTerm.getShortForm()}">id</span>
+                    <a href="../../../docs/graphview-help"
+                       style="position: absolute; right: 20px;">Help with this visualisation</a>
+                </p>
+            </nav>
+        </div>
+
+        <div class="container" style="margin: 9px;">
+            <!--div class="grid_24 alpha"-->
+
+            <section>
+                    <div class="small-12 columnx">
+                        <div class="grid_24 clearfix">
+                            <span style="font-size: small; color: grey; padding: 9px;"
+                                  th:text="${'Visualized term: '+ontologyTerm.getLabel()+' ('+ontologyTerm.getIri()+')'}">http://www.example.com/onto/id</span>
+                            <a id="dataElement"
+                               th:data="${ontologyTerm.getIri()}"
+                               th:href="@{${ontologyTerm.getIri()}}"
+                               class="nounderline" target="blank"><img th:src="@{../../../img/external_link.png}"
+                                                                       src="../static/img/external_link.png"
+                                                                       alt="^"
+                                                                       title="Go to external page" /></a>
+                            <!--a style="float:right;"
+                                  class="nounderline"
+                                  th:href="@{../../../ontologies/__${ontologyTerm.getOntologyName()}__}"
+                                  th:text="${'ontology: '+{ontologyTerm.ontologyName}+' ('+ontologyName+')'}">ontology</a>
+                            <hr style="margin-left: 9px;" /-->
+                        </div>
+
+                        <!-- Visualisation div-->
+                        <div id="ontology_vis"></div>
+                    </div>
+
+            </section>
+
+            <!--/div-->
+        </div>
+    </div>
+</section>
+
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+
+<script>
+    $(document).ready(function() {
+        $('.mansyntax').each(function ()
+        {
+            // $(this).trigger('click');//for clicking element
+            var href = $(this).attr("href");
+            if ($(this).hasClass('ObjectProperty')) {
+                $(this).attr("href", getUrlType('property') + '?iri=' + encodeURIComponent(href));
+            }
+            else if ($(this).hasClass('Class')) {
+                $(this).attr("href", getUrlType('class') + '?iri=' + encodeURIComponent(href));
+            }
+            else if ($(this).hasClass('Individual')) {
+                $(this).attr("href", getUrlType('individual') + '?iri=' + encodeURIComponent(href));
+            }
+        });
+
+        /*Construct the webservice URL from the document.URL*/
+        var termURL=document.URL;
+        /*Add "api" in front of ontologies in the URL*/
+        var first=termURL.substring(0,termURL.indexOf("/ontologies/"));
+        first=first+"/api";
+        /*Get rid of /graph at the end of the URL and add ?iri to the URL. The value for the parameter is fetched from Thymleaf later on*/
+        var second=termURL.substring(termURL.indexOf("/ontologies/"),termURL.indexOf("/graph"));
+        second=second+"?iri=";
+        var webserviceURL=first+second;
+        // console.log("Fetching data from...."+webserviceURL);
+        /*End of webserviceURL construction, can see result with console log above if interested*/
+
+        var tmpnetworkOptions={ webservice : {URL: webserviceURL, OLSschema:true},
+            loadingBar:{pictureURL:"../../../img/loading1.gif"}
+        }
+        var term=$("#dataElement").attr("data");
+
+        var app = require("ols-graphview");
+        var instance = new app();
+        instance.visstart("ontology_vis", term, tmpnetworkOptions,{})
+    });
+</script>
+
+<script src="../static/js/ols-graphview.js" th:src="@{../../../js/ontology_vis_plugin/ols-graphview.js}"></script>
+
+</body>
+</html>

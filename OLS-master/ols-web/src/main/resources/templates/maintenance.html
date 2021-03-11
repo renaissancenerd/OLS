@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"/> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"/> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"/> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html  xmlns:th="https://www.thymeleaf.org" class="no-js" lang="en"> <!--<![endif]-->
+
+
+<head>
+    <div th:replace="fragments/head :: head"></div>
+    <title id="pageTitle" th:inline="text">[[${title}]] &lt; [[${org}]]</title>
+    <!-- A few keywords that relate to the content of THIS PAGE (not the whole project)
+    <meta name="keywords" content="biosamples, europe, EBI" />
+    <!- - Describe what this page is about - ->
+    <meta name="description" content="EMBL-EBI" />
+    <meta name="ebi:last-review" content="2016-12-20" />
+    <!- - The last time the content was reviewed - ->
+    <meta name="ebi:expiry" content="2017-12-20" />
+    <!- - When this content is no longer relevant -->
+</head>
+
+
+<body>
+<th:block th:include="fragments/header :: header"></th:block>
+
+<section id="main-content-area" role="main">
+    <div class="row">
+        <div th:if="${scheduled}" style="font-size: larger;" class="callout alert">
+            <span class="icon icon-generic" data-icon="alert">Maintenance</span>
+            <ul>
+                <li>
+                    OLS is due for maintenance and will be unavailable between <span th:text="${start}"/> and <span th:text="${end}"/>. Apologies for any inconvenience.
+                </li>
+                <li th:if="${message}" th:text="${message}">
+
+                </li>
+            </ul>
+
+            <!--This is a beta site under active development, the full release date is curently scheduled for April 18th. Please see the <a href="roadmap.html">OLS roadmap</a> for our development timelines. Sign up for updates on the <a href="https://listserver.ebi.ac.uk/mailman/listinfo/ols-announce">ols-announce</a> mailing list of contact the <a href="contact">support desk</a> with any feedback or suggestions.-->
+        </div>
+        <div th:if="${maintenance}" style="font-size: larger;" class="callout warning">
+            <span class="icon icon-generic" data-icon="alert">Maintenance mode</span>
+            <ul>
+                <li>
+                    OLS is currently down for scheduled maintenance between <span th:text="${start}"/> and <span th:text="${end}"/>. Apologies for any inconvenience.
+                </li>
+                <li th:if="${message}" th:text="${message}">
+
+                </li>
+            </ul>
+
+            <!--This is a beta site under active development, the full release date is curently scheduled for April 18th. Please see the <a href="roadmap.html">OLS roadmap</a> for our development timelines. Sign up for updates on the <a href="https://listserver.ebi.ac.uk/mailman/listinfo/ols-announce">ols-announce</a> mailing list of contact the <a href="contact">support desk</a> with any feedback or suggestions.-->
+        </div>
+        <div th:unless="${start}" style="font-size: larger;" class="callout success">
+            <span class="icon icon-generic" data-icon="alert">Maintenance</span>
+            <ul>
+                <li>
+                    No maintenance currently scheduled
+                </li>
+            </ul>
+
+            <!--This is a beta site under active development, the full release date is curently scheduled for April 18th. Please see the <a href="roadmap.html">OLS roadmap</a> for our development timelines. Sign up for updates on the <a href="https://listserver.ebi.ac.uk/mailman/listinfo/ols-announce">ols-announce</a> mailing list of contact the <a href="contact">support desk</a> with any feedback or suggestions.-->
+        </div>
+    </div>
+</section>
+
+<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>

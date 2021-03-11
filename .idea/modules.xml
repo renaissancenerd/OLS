@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/OLS.iml" filepath="$PROJECT_DIR$/.idea/OLS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-apps/ols-apps.iml" filepath="$PROJECT_DIR$/OLS-master/ols-apps/ols-apps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-apps/ols-config-importer/ols-config-importer.iml" filepath="$PROJECT_DIR$/OLS-master/ols-apps/ols-config-importer/ols-config-importer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-core/ols-core.iml" filepath="$PROJECT_DIR$/OLS-master/ols-core/ols-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-dependencies/ols-dependencies.iml" filepath="$PROJECT_DIR$/OLS-master/ols-dependencies/ols-dependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-ebi.iml" filepath="$PROJECT_DIR$/OLS-master/ols-ebi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-apps/ols-indexer/ols-indexer.iml" filepath="$PROJECT_DIR$/OLS-master/ols-apps/ols-indexer/ols-indexer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-mongo/ols-mongo.iml" filepath="$PROJECT_DIR$/OLS-master/ols-mongo/ols-mongo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-neo4j/ols-neo4j.iml" filepath="$PROJECT_DIR$/OLS-master/ols-neo4j/ols-neo4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-apps/ols-neo4j-app/ols-neo4j-app.iml" filepath="$PROJECT_DIR$/OLS-master/ols-apps/ols-neo4j-app/ols-neo4j-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-parent/ols-parent.iml" filepath="$PROJECT_DIR$/OLS-master/ols-parent/ols-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-solr/ols-solr.iml" filepath="$PROJECT_DIR$/OLS-master/ols-solr/ols-solr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-apps/ols-solr-app/ols-solr-app.iml" filepath="$PROJECT_DIR$/OLS-master/ols-apps/ols-solr-app/ols-solr-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ols-web/ols-web.iml" filepath="$PROJECT_DIR$/OLS-master/ols-web/ols-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/ontology-tools/ontology-tools.iml" filepath="$PROJECT_DIR$/OLS-master/ontology-tools/ontology-tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OLS-master/resource-usage/resource-usage.iml" filepath="$PROJECT_DIR$/OLS-master/resource-usage/resource-usage.iml" />
+    </modules>
+  </component>
+</project>

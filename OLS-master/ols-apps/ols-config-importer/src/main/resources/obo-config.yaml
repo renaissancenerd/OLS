@@ -1,0 +1,121 @@
+name: OBO Foundry
+title: The OBO Foundry
+markdown: kramdown
+highlighter: rouge
+baseurl: /
+imgurl: /images
+repo: https://github.com/OBOFoundry/OBOFoundry.github.io/
+repo_src: https://github.com/OBOFoundry/OBOFoundry.github.io/blob/master/
+author:
+  name: OBO Technical WG
+ontologies:
+  - activity_status: active
+    build: {checkout: 'git clone https://github.com/EBISPOT/duo.git', path: ., system: git}
+    contact: {email: mcourtot@gmail.com, github: mcourtot, label: Melanie Courtot}
+    dependencies:
+      - {id: iao}
+      - {id: bfo}
+    description: DUO is an ontology which represent data use conditions.
+    homepage: https://github.com/EBISPOT/DUO
+    id: duo
+    jobs:
+      - {id: 'https://travis-ci.org/EBISPOT/DUO', type: travis-ci}
+    layout: ontology_detail
+    license: {label: CC-BY, logo: 'http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png',
+              url: 'http://creativecommons.org/licenses/by/3.0/'}
+    ontology_purl: http://purl.obolibrary.org/obo/duo.owl
+    products:
+      - {id: duo.owl, ontology_purl: 'http://purl.obolibrary.org/obo/duo.owl'}
+    title: The Data Use Ontology
+    tracker: https://github.com/EBISPOT/DUO/issues
+    preferred_root_term:
+      - http://purl.obolibrary.org/obo/DUO_0000001
+      - http://purl.obolibrary.org/obo/DUO_0000017
+      - http://purl.obolibrary.org/obo/OBI_0000066
+  - activity_status: active
+    browsers:
+      - label: BioPortal
+        title: BioPortal Browser
+        url: http://bioportal.bioontology.org/ontologies/BFO?p=classes
+    contact:
+      email: phismith@buffalo.edu
+      github: phismith
+      label: Barry Smith
+    depicted_by: https://avatars2.githubusercontent.com/u/12972134?v=3&s=200
+    description: The upper level ontology upon which OBO Foundry ontologies are built.
+    domain: upper
+    homepage: http://ifomis.org/bfo/
+    id: bfo
+    in_foundry_order: 1
+    layout: ontology_detail
+    license:
+      label: CC-BY
+      logo: http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png
+      url: http://creativecommons.org/licenses/by/4.0/
+    mailing_list: https://groups.google.com/forum/#!forum/bfo-discuss
+    ontology_purl: http://purl.obolibrary.org/obo/bfo.owl
+    products:
+      - id: bfo.owl
+        ontology_purl: http://purl.obolibrary.org/obo/bfo.owl
+      - id: bfo.obo
+        ontology_purl: http://purl.obolibrary.org/obo/bfo.obo
+    review:
+      date: 2016
+      document:
+        label: PDF
+        link: https://drive.google.com/open?id=0B81h9ah4tAM_RnNTRUZnVGRyWXM
+    title: Basic Formal Ontology
+    tracker: https://github.com/BFO-ontology/BFO/issues
+    usages:
+      - description: BFO is imported by multiple OBO ontologies to standardize upper level
+          structure
+        type: owl_import
+        user: http://obofoundry.org
+  - activity_status: active
+    contact:
+      email: contact@emmc.eu
+      description: The European Materials Modelling Ontology (EMMO) is the result of a multidisciplinary effort within the EMMC.
+    domain: upper
+    homepage: https://emmc.info/emmo-info/
+    id: emmo
+    in_foundry_order: 1
+    layout: ontology_detail
+    license:
+      label: CC BY 4.0
+      logo: http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png
+      url: http://creativecommons.org/licenses/by/4.0/
+    ontology_purl: https://raw.githubusercontent.com/emmo-repo/EMMO/master/emmo.owl
+    title: The European Materials Modelling Ontology
+    tracker: https://github.com/emmo-repo/EMMO/issues
+    usages:
+      - description:
+        type: owl_import
+        user: http://obofoundry.org
+  - activity_status: active
+    description: MobiVoc is an open vocabulary for future-oriented mobility solutions.
+    homepage: https://www.mobivoc.org/
+    id: mv
+    layout: ontology_detail
+    license: {label: CC-BY-4.0, logo: 'http://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png',
+              url: 'http://creativecommons.org/licenses/by/4.0/'}
+    ontology_purl: https://raw.githubusercontent.com/vocol/mobivoc/develop/diagrams/mobivoc_v1.1.4.ttl
+    title: MobiVoc Open Mobility Vocabulary
+    tracker: https://github.com/vocol/mobivoc/issues
+    products:
+      - {id: mobivoc_v1.1.4.ttl, ontology_purl: 'https://raw.githubusercontent.com/vocol/mobivoc/develop/diagrams/mobivoc_v1.1.4.ttl'}
+      - {id: , ontology_purl: 'https://raw.githubusercontent.com/vocol/mobivoc/develop/diagrams/mobivoc_v1.1.4.ttl'}
+  - activity_status: active
+    description: The Academic Event Ontology (AEON) is used to represent information regarding academic events.
+    homepage: http://ontology.tib.eu/aeon/
+    id: aeon
+    layout: ontology_detail
+    license: {label:  GPL-3.0 License, url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'}
+    ontology_purl: https://raw.githubusercontent.com/tibonto/aeon/master/aeon.ttl
+    title: Academic Event Ontology
+    tracker: https://github.com/tibonto/aeon/issues
+  - activity_status: active
+    description: Some SKOS triples for testing
+    id: skost
+    layout: ontology_detail
+    ontology_purl: https://raw.githubusercontent.com/SArndt-TIB/triples/master/skos-test.ttl
+    title: SKOS test

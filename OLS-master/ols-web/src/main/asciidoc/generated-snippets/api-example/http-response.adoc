@@ -1,0 +1,26 @@
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 432
+
+{
+  "_links" : {
+    "ontologies" : {
+      "href" : "http://www.ebi.ac.uk/ols/api/ontologies"
+    },
+    "individuals" : {
+      "href" : "http://www.ebi.ac.uk/ols/api/individuals"
+    },
+    "terms" : {
+      "href" : "http://www.ebi.ac.uk/ols/api/terms"
+    },
+    "properties" : {
+      "href" : "http://www.ebi.ac.uk/ols/api/properties"
+    },
+    "profile" : {
+      "href" : "http://www.ebi.ac.uk/ols/api/profile"
+    }
+  }
+}
+----

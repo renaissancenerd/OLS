@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="resource-usage" />
+        <module name="ols-web" />
+        <module name="ols-indexer" />
+        <module name="ols-solr-app" />
+        <module name="ols-neo4j" />
+        <module name="ols-mongo" />
+        <module name="ols-solr" />
+        <module name="ols-config-importer" />
+        <module name="ols-neo4j-app" />
+        <module name="ontology-tools" />
+        <module name="ols-core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ols-apps" target="1.5" />
+      <module name="ols-config-importer" target="1.8" />
+      <module name="ols-core" target="1.8" />
+      <module name="ols-dependencies" target="1.6" />
+      <module name="ols-ebi" target="1.5" />
+      <module name="ols-indexer" target="1.8" />
+      <module name="ols-mongo" target="1.8" />
+      <module name="ols-neo4j" target="1.8" />
+      <module name="ols-neo4j-app" target="1.8" />
+      <module name="ols-parent" target="1.8" />
+      <module name="ols-solr" target="1.8" />
+      <module name="ols-solr-app" target="1.8" />
+      <module name="ols-web" target="1.8" />
+      <module name="ontology-tools" target="1.8" />
+      <module name="resource-usage" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

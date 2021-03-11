@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.semanticweb.elk:elk-owl-implementation:0.5.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-owl-implementation/0.5.0-SNAPSHOT/elk-owl-implementation-0.5.0-20190321.153714-585.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-owl-implementation/0.5.0-SNAPSHOT/elk-owl-implementation-0.5.0-20190321.153714-585-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-owl-implementation/0.5.0-SNAPSHOT/elk-owl-implementation-0.5.0-20190321.153714-585-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

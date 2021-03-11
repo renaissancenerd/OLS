@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.semanticweb.elk:elk-util-hashing:0.5.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-util-hashing/0.5.0-SNAPSHOT/elk-util-hashing-0.5.0-20190321.160914-587.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-util-hashing/0.5.0-SNAPSHOT/elk-util-hashing-0.5.0-20190321.160914-587-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/semanticweb/elk/elk-util-hashing/0.5.0-SNAPSHOT/elk-util-hashing-0.5.0-20190321.160914-587-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
